@@ -57,6 +57,11 @@ dependencies:
   uuid: ^3.0.7
   youtube_explode_dart: ^1.12.3
 
+dependency_overrides:
+  fading_edge_scrollview:
+    git:
+      url: https://github.com/Envoy-Z-Dev/fading_edge_scrollview
+
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_test:

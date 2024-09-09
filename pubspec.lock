@@ -242,13 +242,14 @@ packages:
     source: hosted
     version: "7.0.1"
   fading_edge_scrollview:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: fading_edge_scrollview
-      sha256: c25c2231652ce774cc31824d0112f11f653881f43d7f5302c05af11942052031
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
+      path: "."
+      ref: HEAD
+      resolved-ref: "7d5cfb13f55efc9730894064aff65de90f0cbaca"
+      url: "https://github.com/Envoy-Z-Dev/fading_edge_scrollview"
+    source: git
+    version: "4.1.1"
   fake_async:
     dependency: transitive
     description:
