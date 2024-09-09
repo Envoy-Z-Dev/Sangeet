@@ -13,63 +13,39 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
-}
-
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
-
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode', '1').toInteger()
+def flutterVersionName = localProperties.getProperty('flutter.versionName', '1.0')
 
 android {
-    compileSdkVersion 33
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
+    namespace 'com.suman.sangeet'
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.suman.sangeet"
-        minSdkVersion 21
-        targetSdkVersion 33
-        versionCode flutterVersionCode.toInteger()
+        minSdk 21
+        targetSdk 34
+        versionCode flutterVersionCode
         versionName flutterVersionName
-    }
-
-    signingConfigs {
-        release {
-            storeFile file("key.jks")
-            storePassword keystoreProperties['storePassword']
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            v1SigningEnabled true
-            v2SigningEnabled true
-        }
+        multiDexEnabled true
     }
 
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
             shrinkResources false
+            minifyEnabled false
         }
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
     buildFeatures {
         viewBinding true
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
@@ -79,4 +55,5 @@ flutter {
 
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.2.2')
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
