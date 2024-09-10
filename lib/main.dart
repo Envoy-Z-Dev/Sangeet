@@ -177,7 +177,7 @@ class _MyAppState extends State<MyApp> {
 
     // For sharing files coming from outside the app while the app is in the memory
     _intentDataStreamSubscription =
-        ReceiveSharingIntent.getMediaStream().listen(
+        ReceiveSharingIntent.instance.getMediaStream().listen(
       (List<SharedMediaFile> value) {
         if (value.isNotEmpty) {
           for (final file in value) {
@@ -204,7 +204,9 @@ class _MyAppState extends State<MyApp> {
     );
 
     // For sharing files coming from outside the app while the app is closed
-    ReceiveSharingIntent.getInitialMedia().then((List<SharedMediaFile> value) {
+    ReceiveSharingIntent.instance
+        .getInitialMedia()
+        .then((List<SharedMediaFile> value) {
       if (value.isNotEmpty) {
         for (final file in value) {
           if (file.path.endsWith('.json')) {
