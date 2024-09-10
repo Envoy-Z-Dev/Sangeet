@@ -4,6 +4,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -3995,8 +3996,8 @@ class _SettingPageState extends State<SettingPage>
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             IconButton(
-                                              icon: Icon(
-                                                MdiIcons.telegram,
+                                              icon: const Icon(
+                                                FontAwesomeIcons.telegram,
                                               ),
                                               iconSize: 40,
                                               tooltip: AppLocalizations.of(
@@ -4089,8 +4090,8 @@ class _SettingPageState extends State<SettingPage>
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             IconButton(
-                                              icon: Icon(
-                                                MdiIcons.telegram,
+                                              icon: const Icon(
+                                                FontAwesomeIcons.telegram,
                                               ),
                                               iconSize: 40,
                                               tooltip: AppLocalizations.of(
@@ -4120,8 +4121,8 @@ class _SettingPageState extends State<SettingPage>
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             IconButton(
-                                              icon: Icon(
-                                                MdiIcons.telegram,
+                                              icon: const Icon(
+                                                FontAwesomeIcons.telegram,
                                               ),
                                               iconSize: 40,
                                               tooltip: AppLocalizations.of(

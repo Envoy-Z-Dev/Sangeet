@@ -145,32 +145,30 @@ Future<void> connectToSpotify(
       ),
       mode: LaunchMode.externalApplication,
     );
-    AppLinks(
-      onAppLink: (Uri uri, String link) async {
-        closeInAppWebView();
-        if (link.contains('code=')) {
-          final code = link.split('code=')[1];
-          settingsBox.put('spotifyAppCode', code);
-          final currentTime = DateTime.now().millisecondsSinceEpoch / 1000;
-          final List<String> data =
-              await SpotifyApi().getAccessToken(code: code);
-          if (data.isNotEmpty) {
-            settingsBox.put('spotifyAccessToken', data[0]);
-            settingsBox.put('spotifyRefreshToken', data[1]);
-            settingsBox.put(
-              'spotifyTokenExpireAt',
-              currentTime + int.parse(data[2]),
-            );
-            await fetchPlaylists(
-              data[0],
-              context,
-              playlistNames,
-              settingsBox,
-            );
-          }
+    final AppLinks appLinks = AppLinks();
+    final Uri? initialLink = await appLinks.getInitialLink();
+    if (initialLink != null) {
+      if (initialLink.toString().contains('code=')) {
+        final code = initialLink.toString().split('code=')[1];
+        settingsBox.put('spotifyAppCode', code);
+        final currentTime = DateTime.now().millisecondsSinceEpoch / 1000;
+        final List<String> data = await SpotifyApi().getAccessToken(code: code);
+        if (data.isNotEmpty) {
+          settingsBox.put('spotifyAccessToken', data[0]);
+          settingsBox.put('spotifyRefreshToken', data[1]);
+          settingsBox.put(
+            'spotifyTokenExpireAt',
+            currentTime + int.parse(data[2]),
+          );
+          await fetchPlaylists(
+            data[0],
+            context,
+            playlistNames,
+            settingsBox,
+          );
         }
-      },
-    );
+      }
+    }
   } else {
     await fetchPlaylists(
       accessToken,
