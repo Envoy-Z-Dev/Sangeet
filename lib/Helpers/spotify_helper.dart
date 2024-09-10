@@ -48,28 +48,38 @@ Future<void> callSpotifyFunction(Function(String accessToken)? function) async {
       ),
       mode: LaunchMode.externalApplication,
     );
-    AppLinks(
-      onAppLink: (Uri uri, String link) async {
-        closeInAppWebView();
-        if (link.contains('code=')) {
-          final code = link.split('code=')[1];
-          Hive.box('settings').put('spotifyAppCode', code);
-          final currentTime = DateTime.now().millisecondsSinceEpoch / 1000;
-          final List<String> data =
-              await SpotifyApi().getAccessToken(code: code);
-          if (data.isNotEmpty) {
-            Hive.box('settings').put('spotifyAccessToken', data[0]);
-            Hive.box('settings').put('spotifyRefreshToken', data[1]);
-            Hive.box('settings').put(
-              'spotifyTokenExpireAt',
-              currentTime + int.parse(data[2]),
-            );
-            if (function != null) {
-              return await function.call(data[0]);
-            }
-          }
-        }
-      },
-    );
+    
+    final AppLinks appLinks = AppLinks();
+    final Uri? initialUri = await appLinks.getInitialLink();
+    if (initialUri != null) {
+      await handleUriLink(initialUri, function);
+    }
+
+    appLinks.uriLinkStream.listen((Uri? uri) async {
+      if (uri != null) {
+        await handleUriLink(uri, function);
+      }
+    });
+  }
+}
+
+Future<void> handleUriLink(Uri uri, Function(String accessToken)? function) async {
+  final link = uri.toString();
+  if (link.contains('code=')) {
+    final code = link.split('code=')[1];
+    Hive.box('settings').put('spotifyAppCode', code);
+    final currentTime = DateTime.now().millisecondsSinceEpoch / 1000;
+    final List<String> data = await SpotifyApi().getAccessToken(code: code);
+    if (data.isNotEmpty) {
+      Hive.box('settings').put('spotifyAccessToken', data[0]);
+      Hive.box('settings').put('spotifyRefreshToken', data[1]);
+      Hive.box('settings').put(
+        'spotifyTokenExpireAt',
+        currentTime + int.parse(data[2]),
+      );
+      if (function != null) {
+        await function.call(data[0]);
+      }
+    }
   }
 }
