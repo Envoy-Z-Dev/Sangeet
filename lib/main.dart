@@ -34,7 +34,7 @@ import 'package:sangeet/theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Paint.enableDithering = true;
+  // Paint.enableDithering = true; No longer needed
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await Hive.initFlutter('Sangeet');
@@ -124,9 +124,6 @@ Future<void> openHiveBox(String boxName, {bool limit = false}) async {
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
-
-  static _MyAppState of(BuildContext context) =>
-      context.findAncestorStateOfType<_MyAppState>()!;
 }
 
 class _MyAppState extends State<MyApp> {

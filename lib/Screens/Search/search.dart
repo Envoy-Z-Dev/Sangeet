@@ -642,7 +642,7 @@ class _SearchPageState extends State<SearchPage> {
                                                     if (key == 'Songs') {
                                                       PlayerInvoke.init(
                                                         songsList: [
-                                                          value[index]
+                                                          value[index],
                                                         ],
                                                         index: 0,
                                                         isOffline: false,
@@ -714,7 +714,7 @@ class _SearchPageState extends State<SearchPage> {
   // ignore: avoid_void_async
   void _listen() async {
     if (!_isListening) {
-      bool available = await _speech.initialize();
+      final bool available = await _speech.initialize();
       if (available) {
         setState(() => _isListening = true);
         _speech.listen(

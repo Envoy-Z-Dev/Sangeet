@@ -466,7 +466,7 @@ class _YouTubeSearchPageState extends State<YouTubeSearchPage> {
                                                               null) {
                                                             PlayerInvoke.init(
                                                               songsList: [
-                                                                response
+                                                                response,
                                                               ],
                                                               index: 0,
                                                               isOffline: false,
@@ -539,7 +539,7 @@ class _YouTubeSearchPageState extends State<YouTubeSearchPage> {
                                             ),
                                           ),
                                         ),
-                                      )
+                                      ),
                                   ],
                                 ),
                 ),

@@ -183,7 +183,7 @@ class FormatResponse {
             : response['more_info']['music'],
         'image': getImageUrl(response['image'].toString()),
         'perma_url': response['perma_url'],
-        'url': decode(response['encrypted_media_url'].toString())
+        'url': decode(response['encrypted_media_url'].toString()),
       };
     } catch (e) {
       Logger.root.severe('Error inside FormatSingleAlbumSongResponse: $e');
@@ -242,7 +242,7 @@ class FormatResponse {
             : response['description'].toString().unescape(),
         'title': response['title'].toString().unescape(),
         'artist': response['music'] == null
-            ? (response['more_info']?['music']) == null
+            ? response['more_info']?['music'] == null
                 ? (response['more_info']?['artistMap']?['primary_artists'] ==
                             null ||
                         (response['more_info']?['artistMap']?['primary_artists']
@@ -500,7 +500,7 @@ class FormatResponse {
         'radio',
         'city_mod',
         'artist_recos',
-        ...promoList
+        ...promoList,
       ];
       data['collections_temp'] = promoListTemp;
     } catch (e) {
