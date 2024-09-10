@@ -131,13 +131,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale _locale = const Locale('en', '');
-  late StreamSubscription _intentTextStreamSubscription;
   late StreamSubscription _intentDataStreamSubscription;
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   void dispose() {
-    _intentTextStreamSubscription.cancel();
     _intentDataStreamSubscription.cancel();
     super.dispose();
   }
@@ -158,29 +156,9 @@ class _MyAppState extends State<MyApp> {
       setState(() {});
     });
 
-    _intentTextStreamSubscription = ReceiveSharingIntent.getTextStream().listen(
-      (String value) {
-        Logger.root.info('Received intent on stream: $value');
-        handleSharedText(value, navigatorKey);
-      },
-      onError: (err) {
-        Logger.root.severe('ERROR in getTextStream', err);
-      },
-    );
-
-    ReceiveSharingIntent.getInitialText().then(
-      (String? value) {
-        Logger.root.info('Received Intent initially: $value');
-        if (value != null) handleSharedText(value, navigatorKey);
-      },
-      onError: (err) {
-        Logger.root.severe('ERROR in getInitialTextStream', err);
-      },
-    );
-
     // For sharing files coming from outside the app while the app is in the memory
     _intentDataStreamSubscription =
-        ReceiveSharingIntent.getMediaStream().listen(
+        ReceiveSharingIntent.instance.getMediaStream().listen(
       (List<SharedMediaFile> value) {
         if (value.isNotEmpty) {
           for (final file in value) {
@@ -197,6 +175,11 @@ class _MyAppState extends State<MyApp> {
               ).then(
                 (value) => navigatorKey.currentState?.pushNamed('/playlists'),
               );
+            } else if (file.path.endsWith('.txt')) {
+              handleSharedText(file.path, navigatorKey); // Handle text files
+            } else if (file.path.endsWith('.mp3')) {
+              // Handle audio files, if needed
+              // ... 
             }
           }
         }
@@ -207,7 +190,7 @@ class _MyAppState extends State<MyApp> {
     );
 
     // For sharing files coming from outside the app while the app is closed
-    ReceiveSharingIntent.getInitialMedia().then((List<SharedMediaFile> value) {
+    ReceiveSharingIntent.instance.getInitialMedia().then((List<SharedMediaFile> value) {
       if (value.isNotEmpty) {
         for (final file in value) {
           if (file.path.endsWith('.json')) {
@@ -222,6 +205,11 @@ class _MyAppState extends State<MyApp> {
             ).then(
               (value) => navigatorKey.currentState?.pushNamed('/playlists'),
             );
+          } else if (file.path.endsWith('.txt')) {
+            handleSharedText(file.path, navigatorKey); // Handle text files
+          } else if (file.path.endsWith('.mp3')) {
+            // Handle audio files, if needed
+            // ...
           }
         }
       }
