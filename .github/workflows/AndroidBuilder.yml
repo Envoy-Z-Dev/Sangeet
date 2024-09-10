@@ -48,7 +48,7 @@ jobs:
 
       # Build APKs
       - name: Build APKs
-        run: flutter build apk --debug --split-per-abi
+        run: flutter build apk --debug
 
       # Upload APKs
       - name: Upload APK
