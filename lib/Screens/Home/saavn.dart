@@ -26,7 +26,7 @@ List preferredLanguage = Hive.box('settings')
 List likedRadio =
     Hive.box('settings').get('likedRadio', defaultValue: []) as List;
 Map data = Hive.box('cache').get('homepage', defaultValue: {}) as Map;
-List lists = ['recent', 'playlist', ...?data['collections']];
+List lists = ['recent', 'playlist', ...(data['collections'] as List? ?? [])];
 
 class SaavnHomePage extends StatefulWidget {
   @override
@@ -54,7 +54,7 @@ class _SaavnHomePageState extends State<SaavnHomePage>
     if (recievedData.isNotEmpty) {
       Hive.box('cache').put('homepage', recievedData);
       data = recievedData;
-      lists = ['recent', 'playlist', ...?data['collections']];
+      lists = ['recent', 'playlist', ...(data['collections'] as List? ?? [])];
       lists.insert((lists.length / 2).round(), 'likedArtists');
     }
     setState(() {});
@@ -62,7 +62,7 @@ class _SaavnHomePageState extends State<SaavnHomePage>
     if (recievedData.isNotEmpty) {
       Hive.box('cache').put('homepage', recievedData);
       data = recievedData;
-      lists = ['recent', 'playlist', ...?data['collections']];
+      lists = ['recent', 'playlist', ...(data['collections'] as List? ?? [])];
       lists.insert((lists.length / 2).round(), 'likedArtists');
     }
     setState(() {});

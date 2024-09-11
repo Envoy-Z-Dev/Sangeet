@@ -3804,7 +3804,8 @@ class _SettingPageState extends State<SettingPage>
                                         Navigator.pop(context);
                                         launchUrl(
                                           Uri.parse(
-                                              'https://sumanishere.github.io/Sangeet/',),
+                                            'https://sumanishere.github.io/Sangeet/',
+                                          ),
                                           mode: LaunchMode.externalApplication,
                                         );
                                       },
