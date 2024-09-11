@@ -27,9 +27,6 @@
         android:label="Sangeet"
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true">
-        <meta-data
-            android:name="com.google.android.gms.car.application"
-            android:resource="@xml/automotive_app_desc" />
         <receiver
             android:name=".SangeetMusicWidget"
             android:exported="false">
