@@ -67,7 +67,7 @@ class DataSearch extends SearchDelegate {
                 (element) =>
                     element.artist!.toLowerCase().contains(query.toLowerCase()),
               ),
-            }
+            },
           ];
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
@@ -120,7 +120,7 @@ class DataSearch extends SearchDelegate {
                 (element) =>
                     element.artist!.toLowerCase().contains(query.toLowerCase()),
               ),
-            }
+            },
           ];
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
@@ -240,7 +240,7 @@ class DownloadsSearch extends SearchDelegate {
                     .toLowerCase()
                     .contains(query.toLowerCase()),
               ),
-            }
+            },
           ];
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
@@ -336,7 +336,7 @@ class DownloadsSearch extends SearchDelegate {
                     .toLowerCase()
                     .contains(query.toLowerCase()),
               ),
-            }
+            },
           ];
     return ListView.builder(
       physics: const BouncingScrollPhysics(),

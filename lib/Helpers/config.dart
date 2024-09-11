@@ -316,7 +316,7 @@ class MyTheme with ChangeNotifier {
         'cardGrad': cardGrad,
         'bottomGrad': bottomGrad,
         'colorHue': colorHue,
-      }
+      },
     });
   }
 
