@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Configure Java for Android build
+      # Setup Java
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -24,7 +24,7 @@ jobs:
           distribution: 'temurin'
           cache: "gradle" 
 
-      # Cache Gradle files to speed up builds
+      # Cache Gradle Dependencies
       - name: Cache Gradle Dependencies
         uses: actions/cache@v3
         with:
@@ -35,24 +35,24 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      # Set up Flutter environment
+      # Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}
           cache: true
 
-      # Install Flutter dependencies
+      # Install Dependencies
       - name: Install Flutter Dependencies
         run: flutter pub get
 
-      # Build APKs
-      - name: Build APKs
+      # Build APK
+      - name: Build APK
         run: flutter build apk --debug
 
-      # Upload APKs
+      # Upload APK
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: flutter-apks
-          path: build/app/outputs/flutter-apk/app-armeabi-v7a-debug.apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
