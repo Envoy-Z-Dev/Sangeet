@@ -3964,7 +3964,7 @@ class _SettingPageState extends State<SettingPage>
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             IconButton(
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 MdiIcons.gmail,
                                               ),
                                               iconSize: 40,
@@ -3995,7 +3995,7 @@ class _SettingPageState extends State<SettingPage>
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             IconButton(
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 MdiIcons.telegram,
                                               ),
                                               iconSize: 40,
@@ -4026,7 +4026,7 @@ class _SettingPageState extends State<SettingPage>
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             IconButton(
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 MdiIcons.instagram,
                                               ),
                                               iconSize: 40,
@@ -4089,7 +4089,7 @@ class _SettingPageState extends State<SettingPage>
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             IconButton(
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 MdiIcons.telegram,
                                               ),
                                               iconSize: 40,
@@ -4120,7 +4120,7 @@ class _SettingPageState extends State<SettingPage>
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             IconButton(
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 MdiIcons.telegram,
                                               ),
                                               iconSize: 40,

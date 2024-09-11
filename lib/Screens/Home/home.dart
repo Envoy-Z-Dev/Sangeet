@@ -493,7 +493,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           NavigationRailDestination(
-                            icon: Icon(MdiIcons.youtube),
+                            icon: const Icon(MdiIcons.youtube),
                             label: Text(AppLocalizations.of(context)!.youTube),
                           ),
                           NavigationRailDestination(
@@ -846,7 +846,7 @@ class _HomePageState extends State<HomePage> {
                                   Theme.of(context).colorScheme.secondary,
                             ),
                           SalomonBottomBarItem(
-                            icon: Icon(MdiIcons.youtube),
+                            icon: const Icon(MdiIcons.youtube),
                             title: Text(AppLocalizations.of(context)!.youTube),
                             selectedColor:
                                 Theme.of(context).colorScheme.secondary,
